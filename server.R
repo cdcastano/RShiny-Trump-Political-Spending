@@ -13,7 +13,8 @@ shinyServer(function(input, output) {
    whobardata = data2 %>% 
       filter(Paying == input$spender, year == input$year1) %>% 
       group_by(Paid) %>% 
-      summarise(total = sum(amount, na.rm = TRUE))
+      summarise(total = sum(amount, na.rm = TRUE)) %>% 
+      filter(total > 5000)
     gvisColumnChart(whobardata, options = list(width = 1000, height = 500, vAxes="[{viewWindowMode:'explicit',
 			viewWindow:{min:0, max:400000}}]"))
   })
