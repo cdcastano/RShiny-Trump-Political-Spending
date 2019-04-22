@@ -7,7 +7,7 @@ library(googleVis)
 
 #ui.R#
 shinyUI(dashboardPage(
-  dashboardHeader(title = "Payments by Year:"),
+  dashboardHeader(title = "Navigation:"),
   dashboardSidebar(
     sidebarMenu(
       menuItem("Introduction", tabName = "introtab", icon = icon("newspaper")),
@@ -20,16 +20,16 @@ shinyUI(dashboardPage(
   ),
   dashboardBody(
     tabItems(
-      tabItem(tabName = "introtab", h2("Political spending at Trump-owned Properties by Entity", align = 'center'), 
+      tabItem(tabName = "introtab", box(h2("Political Spending at Trump-owned Properties by Entity, Year", align = 'center'), 
                                     h4("Coded by: Chris Castano (cdc67@georgetown.edu)", align = 'center'),
-                                    img(src='http://static.digg.com/images/6a4a5c6a1f404b3da2141eaec0860206_9733b849c381477383942c1516d20f9d_header.jpeg', align = 'center', 
-                                        height = 383, width = 1280),
                                     p(''),
-                                    p('This app generates basic visualizations of state and 
-                                      federal spending at Trump-owned properties in the United States. 
-                                      Despite many past presidents doing their utmost to separate their 
-                                      financial and political interests, the president continues to benefit from government 
-                                      officials and organizations, both foreign and domestic, patronizing his businesses.'),
+                                    p(''),
+                                    h1(strong("Political campaigns and government agencies have spent at least $16,085,911.67 at 
+                                              properties owned by the president since 2015."), align = 'center'),
+                                    p(''),
+                                    p(''),
+                                    p('This app generates basic visualizations of political spending at Trump-owned properties in the United States 
+                                      based on a selected year and organization. Only the 15 heaviest spending organizations are available at the moment.'),
                                     p(''),
                                     p('The data used for this app is free to download from the ProPublica Data Store. 
                                       I do not own it. I have not modified its content significantly except to make visualization easier. 
@@ -47,10 +47,16 @@ shinyUI(dashboardPage(
                                        Feb. 13, 2018; data from the General Services Administration is from Jan. 20, 2017 through 
                                        Nov. 20, 2017; data from the Department of State is from Jan. 20, 2017 through Aug. 2, 2017, 
                                        with three expenditures with unknown transaction dates; State and local government agency 
-                                       expenditure data is from Jan. 20, 2017 through June 2018.")
+                                       expenditure data is from Jan. 20, 2017 through June 2018."))
               ),
       
       tabItem(tabName = "whotab", h3("What Trump-owned company was this entity paying?"), fluidRow(box(htmlOutput("whobar")))),
       tabItem(tabName = "whattab", h3("What types of services was this entity paying for?"), fluidRow(box(htmlOutput("whatbar")))),
-      tabItem(tabName = "wheretab", h3("Where was this spender making this payment?"), fluidRow(box(htmlOutput("wherebar"))), fluidRow(box(htmlOutput("wheremap"))))
+      tabItem(tabName = "wheretab", h3("Where was this spender making this payment?"), 
+              #fluidRow(box(htmlOutput("wherebar"))), 
+              fluidRow(
+                #box(htmlOutput("wheremap")), 
+                (htmlOutput("googmap"))))
 ))))
+
+

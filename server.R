@@ -15,7 +15,7 @@ shinyServer(function(input, output) {
       group_by(Paid) %>% 
       summarise(total = sum(amount, na.rm = TRUE)) %>% 
       filter(total > 5000)
-    gvisColumnChart(whobardata, options = list(width = 1000, height = 500, vAxes="[{viewWindowMode:'explicit',
+    gvisColumnChart(whobardata, options = list(vAxes="[{viewWindowMode:'explicit',
 			viewWindow:{min:0, max:400000}}]"))
   })
   
@@ -24,41 +24,41 @@ shinyServer(function(input, output) {
       filter(Paying == input$spender, year == input$year1) %>% 
       group_by(purpose_scrubbed) %>% 
       summarise(total = sum(amount, na.rm = TRUE))
-    gvisColumnChart(whatbardata, options = list(width = 1000, height = 500, vAxes="[{viewWindowMode:'explicit',
+    gvisColumnChart(whatbardata, options = list(vAxes="[{viewWindowMode:'explicit',
 			viewWindow:{min:0, max:400000}}]"))
   })
   
-  output$wherebar = renderGvis({
-    wherebardata = data2 %>% 
-      filter(Paying == input$spender, year == input$year1) %>% 
-      group_by(state) %>% 
-      summarise(total = sum(amount, na.rm = TRUE))
-    gvisColumnChart(wherebardata, options = list(width = 1000, height = 500, vAxes="[{viewWindowMode:'explicit',
-			viewWindow:{min:0, max:400000}}]"))
-  })
+  #output$wherebar = renderGvis({
+   # wherebardata = data2 %>% 
+    #  filter(Paying == input$spender, year == input$year1) %>% 
+     # group_by(state) %>% 
+      #summarise(total = sum(amount, na.rm = TRUE))
+  #  gvisColumnChart(wherebardata, options = list(vAxes="[{viewWindowMode:'explicit',
+		#	viewWindow:{min:0, max:400000}}]"))
+  #})
 
-  output$wheremap = renderGvis({
-    wherebarmapdata = data2 %>% 
-      filter(Paying == input$spender, year == input$year1) %>% 
-      group_by(state) %>% 
-      summarise(total = sum(amount, na.rm = TRUE))
-    gvisGeoChart(wherebarmapdata, "state", "total", options=list(region="US", 
-                                                            displayMode="regions", 
-                                                            resolution="provinces",
-                                                            width=1000, height=500))
-  })
+  #output$wheremap = renderGvis({
+   # wherebarmapdata = data2 %>% 
+    #  filter(Paying == input$spender, year == input$year1) %>% 
+     # group_by(state) %>% 
+    #  summarise(total = sum(amount, na.rm = TRUE))
+    #gvisGeoChart(wherebarmapdata, "state", "total", options=list(region="US", 
+     #                                                       displayMode="regions", 
+      #                                                      resolution="provinces"))
+  #})
   
   output$googmap = renderGvis({
-    googwheremapdata = data2 %>% 
-    gvisMap(Andrew, "LatLong" , "Tip", 
+    googwheremapdata = data3 %>%
+      filter(Paying == input$spender, year == input$year1) %>% 
+      group_by(Paid) %>% 
+      summarise(total = sum(amount, na.rm = TRUE), llong = first(latlong.y))
+    gvisMap(googwheremapdata, "llong" , "total", 
             options=list(showTip=TRUE, 
                          showLine=TRUE, 
                          enableScrollWheel=TRUE,
                          mapType='terrain', 
                          useMapTypeControl=TRUE))
   })
-  
-  
 })
 
 
