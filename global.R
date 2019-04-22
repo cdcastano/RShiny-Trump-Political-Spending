@@ -1,0 +1,1 @@
+data2 = read.csv("propub_clean", stringsAsFactors = FALSE)
