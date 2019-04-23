@@ -21,7 +21,7 @@ shinyUI(dashboardPage(
   ),
   dashboardBody(
     tabItems(
-      tabItem(tabName = "introtab", h2(strong("Political Spending at Trump-owned Properties by Entity, Year"), align = 'center'), 
+      tabItem(tabName = "introtab", h2(strong("Political Spending at Trump-owned Properties by Organization, Year"), align = 'center'), 
                                     
                                     h4(strong("Coded by: Chris Castano (cdc67@georgetown.edu)"), align = 'center'),
                                     

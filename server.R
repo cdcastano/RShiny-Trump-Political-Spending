@@ -37,18 +37,6 @@ shinyServer(function(input, output) {
                                                    hAxes="[{title:'U.S. State'}]", width = 800, height = 300))
   })
 
-  
-  #output$wheremap = renderGvis({
-  #  wherebarmapdata = data2 %>% 
-  #    filter(Paying == input$spender, year == input$year1) %>% 
-  #    group_by(state) %>% 
-     # summarise(TotalUSD = sum(amount, na.rm = TRUE))
-    #plot.title = "State Totals"
-   # gvisGeoChart(wherebarmapdata, "state", "TotalUSD", options=list(title = plot.title, region="US", 
-                                                           # displayMode="regions", 
-                                                            #resolution="provinces", height = 400))
-  #})
-  
   output$googmap = renderGvis({
     googwheremapdata = data3 %>%
       filter(Paying == input$spender, year == input$year1) %>% 
