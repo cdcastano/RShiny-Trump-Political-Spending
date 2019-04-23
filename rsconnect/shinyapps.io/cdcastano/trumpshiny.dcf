@@ -1,0 +1,10 @@
+name: trumpshiny
+title:
+username:
+account: cdcastano
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 883299
+bundleId: 2031182
+url: https://cdcastano.shinyapps.io/trumpshiny/
+when: 1555981682.38082

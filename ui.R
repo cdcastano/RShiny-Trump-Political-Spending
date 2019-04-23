@@ -1,10 +1,3 @@
-library(shiny)
-library(dplyr)
-library(ggplot2)
-library(leaflet)
-library(shinydashboard)
-library(googleVis)
-
 #ui.R#
 shinyUI(dashboardPage(
   dashboardHeader(title = "Navigation:"),

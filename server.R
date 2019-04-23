@@ -1,16 +1,7 @@
-library(shiny)
-library(dplyr)
-library(ggplot2)
-library(leaflet)
-library(shinydashboard)
-library(googleVis)
-
-data2 = read.csv("propub_clean", stringsAsFactors = FALSE)
-
 #server.R#
 shinyServer(function(input, output) {
   output$whobar = renderGvis({
-   whobardata = data2 %>% 
+   whobardata = data %>% 
       filter(Paying == input$spender, year == input$year1) %>% 
       group_by(Paid) %>% 
       summarise(TotalUSD = sum(amount, na.rm = TRUE)) %>% 
@@ -20,7 +11,7 @@ shinyServer(function(input, output) {
   })
   
   output$whatbar = renderGvis({
-    whatbardata = data2 %>% 
+    whatbardata = data %>% 
       filter(Paying == input$spender, year == input$year1) %>% 
       group_by(purpose_scrubbed) %>% 
       summarise(TotalUSD = sum(amount, na.rm = TRUE))
@@ -29,7 +20,7 @@ shinyServer(function(input, output) {
   })
   
   output$wherebar = renderGvis({
-    wherebardata = data2 %>% 
+    wherebardata = data %>% 
       filter(Paying == input$spender, year == input$year1) %>% 
       group_by(state) %>% 
       summarise(TotalUSD = sum(amount, na.rm = TRUE))
@@ -38,7 +29,7 @@ shinyServer(function(input, output) {
   })
 
   output$googmap = renderGvis({
-    googwheremapdata = data3 %>%
+    googwheremapdata = data %>%
       filter(Paying == input$spender, year == input$year1) %>% 
       group_by(Paid) %>% 
       summarise(TotalUSD = sum(amount, na.rm = TRUE), llong = first(latlong.y)) %>% 
